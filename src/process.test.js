@@ -754,6 +754,14 @@ describe("Create Rules", () => {
       expect(result.digitRule.inputs).toEqual([3]);
     });
 
+    it("should match Ten Thousands digit even?", () => {
+      const result = createDigitIsRule("Ten Thousands digit even?");
+
+      expect(result).not.toBeUndefined();
+      expect(result.digitName).toBe("ten-thousands");
+      expect(result.digitRule.constructor.name).toBe("IsEven");
+    });
+
     it("should match hundred-thousands digit 3", () => {
       const result = createDigitIsRule("hundred-thousands digit 3");
 

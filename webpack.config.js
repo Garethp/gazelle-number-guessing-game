@@ -29,6 +29,7 @@ export default {
     new MergeIntoSingleFilePlugin({
       files: {
         "main.js": [
+          "src/options.js",
           "src/utils.js",
           "src/ruleFunctions.js",
           "src/rules.js",

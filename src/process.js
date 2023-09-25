@@ -54,7 +54,7 @@ export const createRules = (input) => {
  * @return {Rule}
  */
 export const createRule = (input) => {
-  input = input.trim().replaceAll("'", "");
+  input = input.trim().replaceAll("'", "").replace(/\?$/, "");
 
   if (!input.length) return new NoOpRule();
   if (input.match(/^HP/i)) return new NoOpRule();
@@ -309,9 +309,11 @@ export const createIsRule = (input) => {
  * @return {Rule | undefined}
  */
 export const createDigitIsRule = (input) => {
-  if (!input.match(/^(\S+)\s+digit\s+(.*?)$/i)) return;
+  if (!input.match(/^([\S\s]+?)\s+digit\s+(.*?)$/i)) return;
 
-  const [_, digitName, ruleString] = input.match(/^(\S+)\s+digit\s+(.*?)$/i);
+  const [_, digitName, ruleString] = input.match(
+    /^([\S\s]+?)\s+digit\s+(.*?)$/i
+  );
   const rule = createRule(ruleString);
 
   if (rule.constructor.name === "RuleNotFound") return;

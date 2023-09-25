@@ -128,9 +128,10 @@ describe("Collapse Is Odd", () => {
     expect(collapse([new Not(0, 2, 4, 6, 8)], true)).toEqual([new IsOdd()]);
   });
 
-  it("should not collapse more than complete not rules into IsOdd for DigitIs", () => {
+  it("should collapse more than complete not rules into IsOdd for DigitIs", () => {
     expect(collapse([new Not(0, 1, 2, 4, 6, 8)], true)).toEqual([
-      new Not(0, 1, 2, 4, 6, 8),
+      new Not(1),
+      new IsOdd(),
     ]);
   });
 
@@ -173,9 +174,10 @@ describe("Collapse Is Even", () => {
     expect(collapse([new Not(1, 3, 5, 7, 9)], true)).toEqual([new IsEven()]);
   });
 
-  it("should not collapse more than complete is not rules into IsEven for DigitIs", () => {
+  it("should collapse more than complete is not rules into IsEven for DigitIs", () => {
     expect(collapse([new Not(1, 2, 3, 5, 7, 9)], true)).toEqual([
-      new Not(1, 2, 3, 5, 7, 9),
+      new Not(2),
+      new IsEven(),
     ]);
   });
 
@@ -239,7 +241,7 @@ describe("Collapse Is", () => {
   });
 
   it("should collapse to the most restrictive Is", () => {
-    expect(collapse([new Is(1, 3, 4), new Is(3, 4)])).toEqual(new Is([3, 4]));
+    expect(collapse([new Is(1, 3, 4), new Is(3, 4)])).toEqual(new Is(3, 4));
   });
 });
 

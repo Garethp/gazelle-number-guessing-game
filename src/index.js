@@ -60,8 +60,8 @@ const decreaseHealthBy = (amount) => {
   setHealth(hp);
 };
 
-const save_data_on_create_post = true;
-const display_toggle = true; //show [+] to expand or contract game host information
+var save_data_on_create_post = true;
+var display_toggle = true; //show [+] to expand or contract game host information
 
 function htmlToBBCode(html) {
   html = html.replace(/<br>\s*?<br>\s*?Last edited by([\s\S]*)<\/span>/m, "");
@@ -94,7 +94,7 @@ const hostingtoolshtml = `<div>
                 <label for="rules">Rules:
             </td>
             <td class="lefty">
-                <textarea id="rules" cols="90" rows="2" style="margin-top: 10px; margin-bottom: 10px;"/></label>
+                <textarea id="rules" cols="90" rows="8" style="margin-top: 10px; margin-bottom: 10px;"/></label>
             </td>
             <td style="margin-top: 10px; margin-left: 50px; float: left;">
                 <label for="mynumber">Number: <input type="text" id="mynumber" size=7></label>
@@ -288,8 +288,6 @@ const hostingtoolshtml = `<div>
         setHealth(health);
         game.rules = createRules(post);
 
-        noty({ text: "Rules copies" });
-
         if (
           game.rules.filter((rule) => rule.constructor.name === "RuleNotFound")
             .length > 0
@@ -333,11 +331,9 @@ const hostingtoolshtml = `<div>
         if (!game.rules.every((rule) => rule.matches(number))) {
           game.invalids.push({ author: postAuthor, id: postid, post });
         } else {
-          noty({ text: "Added request for number " });
           decreaseHealthBy(1);
         }
       } else {
-        noty({ text: "Added request for new rule" });
         decreaseHealthBy(15);
       }
 

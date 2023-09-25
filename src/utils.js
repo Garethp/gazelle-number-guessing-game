@@ -15,3 +15,15 @@ export const arraysAreEqual = (a, b) => {
 
   return a.every((item) => b.indexOf(item) !== -1);
 };
+
+/**
+ * Checks whether all items in itemsToLook for are present in arrayToCheck
+ *
+ * @param {Array} arrayToCheck
+ * @param {Array} itemsToLookFor
+ *
+ * @return {boolean}
+ */
+export const arrayContains = (arrayToCheck, itemsToLookFor) => {
+  return itemsToLookFor.every((item) => arrayToCheck.indexOf(item) > -1);
+};

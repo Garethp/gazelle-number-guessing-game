@@ -442,11 +442,18 @@ export const collapseIsEven = (rules, digitIsRule = false) => {
     const notRule = rules.find(
       (rule) =>
         rule.constructor.name === "Not" &&
-        arraysAreEqual([1, 3, 5, 7, 9], rule.inputs)
+        arrayContains(rule.inputs, [1, 3, 5, 7, 9])
     );
 
     if (notRule) {
       rules = [...rules.filter((rule) => rule.constructor.name !== "Not")];
+      notRule.inputs = notRule.inputs.filter(
+        (item) => [1, 3, 5, 7, 9].indexOf(item) === -1
+      );
+
+      if (notRule.inputs.length > 0) {
+        rules.push(notRule);
+      }
     }
 
     if (isRule || notRule) {
@@ -505,11 +512,18 @@ export const collapseIsOdd = (rules, digitIsRule = false) => {
     const notRule = rules.find(
       (rule) =>
         rule.constructor.name === "Not" &&
-        arraysAreEqual([0, 2, 4, 6, 8], rule.inputs)
+        arrayContains(rule.inputs, [0, 2, 4, 6, 8])
     );
 
     if (notRule) {
       rules = [...rules.filter((rule) => rule.constructor.name !== "Not")];
+      notRule.inputs = notRule.inputs.filter(
+        (input) => [0, 2, 4, 6, 8].indexOf(input) === -1
+      );
+
+      if (notRule.inputs.length > 0) {
+        rules.push(notRule);
+      }
     }
 
     if (isRule || notRule) {
